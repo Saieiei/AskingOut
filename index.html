@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <title>Asking Out Website</title>
+    <style>
+        body {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f0f0f0;
+            flex-direction: column;
+        }
+
+        .container {
+            text-align: center;
+            margin-top: 100vh; /* Adjust this value to control the initial scroll position */
+        }
+
+        #playButton {
+            padding: 10px;
+            font-size: 16px;
+            cursor: pointer;
+            margin-bottom: 100px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>hoiiii, Saiei has come to tell u something😗</h1>
+        <h2>uk what to do 🫣🫢🙈🙊😶</h2>
+        <button id="playButton">Play</button>
+    </div>
+    <audio autoplay loop>
+        <source src="song.mp3" type="audio/mp3">
+        Your browser does not support the audio element.
+    </audio>
+    <div class="container" id="bottomContainer">
+        <h2 id="asking-message">Will you go on a date with me?</h2>
+        <div id="emoji-container">
+            <img id="emoji" src="sad_emoji.png" alt="🥺">
+        </div>
+        <div id="options">
+            <button onclick="handleResponse('yes')" data-response="yes">Yes</button>
+            <button onclick="handleResponse('no')" data-response="no">No</button>
+        </div>
+        <div id="result"></div>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+    </div>
+    <script src="script.js"></script>
+    <script>
+        document.getElementById('playButton').addEventListener('click', function() {
+            // Play the song
+            var audio = new Audio('song.mp3');
+            audio.play();
+
+            // Scroll down to the bottom container after a delay
+            setTimeout(function() {
+                var bottomContainer = document.getElementById('bottomContainer');
+                var offsetTop = bottomContainer.offsetTop;
+                var duration = 0.01; // milliseconds
+                var startTime;
+
+                function scroll(timestamp) {
+                    startTime = startTime || timestamp;
+                    var elapsed = timestamp - startTime;
+                    var progress = elapsed / duration;
+
+                    window.scrollTo({
+                        top: offsetTop * progress,
+                        behavior: 'smooth'
+                    });
+
+                    if (elapsed < duration) {
+                        requestAnimationFrame(scroll);
+                    }
+                }
+
+                requestAnimationFrame(scroll);
+
+                // Navigate to index.html after the audio finishes playing
+                audio.addEventListener('ended', function() {
+                    // Pause the audio before navigating
+                    audio.pause();
+                    audio.currentTime = 0;
+
+                    // Navigate to index.html
+                    window.location.href = 'index.html';
+                });
+            }, 1000); // 1000 milliseconds = 1 second
+        });
+    </script>
+</body>
+</html>

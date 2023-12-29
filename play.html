@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Play Song</title>
+</head>
+<body>
+    <h1>Click the button to play the song</h1>
+    <button id="playButton">Play Song</button>
+
+    <script>
+        document.getElementById('playButton').addEventListener('click', function() {
+            // Play the song
+            var audio = new Audio('song.mp3');
+            audio.play();
+
+            // Navigate to index.html after a delay
+            setTimeout(function() {
+                // Pause the audio before navigating
+                audio.pause();
+                audio.currentTime = 0;
+
+                // Navigate to index.html
+                window.location.href = 'index.html';
+            }, 1000); // 1000 milliseconds = 1 second
+        });
+    </script>
+</body>
+</html>
